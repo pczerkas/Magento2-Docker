@@ -1,5 +1,5 @@
 FROM php:8.1-apache
-LABEL maintainer="Ata Berk YILMAZ <me@ataberkylmz.com>"
+LABEL maintainer="Adyen Ecommerce Plugins Team <magento@adyen.com>"
 
 ENV MAGENTO_HOST="<will be defined>" \
 DB_SERVER="<will be defined>" \
