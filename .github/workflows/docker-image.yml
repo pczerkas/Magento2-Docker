@@ -26,5 +26,5 @@ jobs:
       with:
         context: ./base/2.4.6-p3
         file: ./base/2.4.6-p3/Dockerfile
-        tags: yourusername/my-image-name:latest
+        tags: adyenplugins/magento:2.4.6-p3
         push: true
