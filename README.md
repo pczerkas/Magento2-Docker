@@ -164,7 +164,6 @@ After the tunnel is created, you can configure your IDE to listen on 9003 (or th
 - **DB_NAME**: Database name in your Database host \(default *magento*\)
 - **DB_USER**: Database user \(default *magento*\)
 - **DB_PASSWORD**: Database password \(default *magento*\)
-- **DB_PREFIX**: Database table prefix \(default *m2_*\)
 - **ELASTICSEARCH_SERVER**: IP or Hostname of Elasticsearch server/container \(default *\<will be defined\>*\), **Required**.
 - **ELASTICSEARCH_PORT**: Port of the elasticsearch host/instance \(default *9200*\)
 - **ELASTICSEARCH_INDEX_PREFIX**: Index prefix for Elasticsearch \(default *magento2*\).

@@ -20,13 +20,11 @@ fi
 
 if [ $DROP_DB -eq 1 ]; then
     echo "Dropping tables in database $DB_NAME"
-    #mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS \`$DB_NAME\`;"
     echo "$DB_NAME"| xargs -I{} sh -c "mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -Nse 'show tables' {}| xargs -I[] mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e 'SET FOREIGN_KEY_CHECKS=0; drop table []' {}"
     echo "Database tables in $DB_NAME dropped."
 else
     echo "Skipping database tables drop."
 fi
-
 
 if [ "$ELASTICSEARCH_SERVER" != "<will be defined>" ]; then
     RET=1
@@ -47,19 +45,18 @@ else
 fi
 
 if [ "$RABBITMQ_SERVER" != "<will be defined>" ]; then
-    # RET=0
-    # while [ $RET -ne 1 ]; do
-    #     echo "Checking if $RABBITMQ_SERVER is available."
-    #     curl -XGET "$RABBITMQ_SERVER:$RABBITMQ_PORT" > /dev/null 2>&1
-    #     RET=$?
+    RET=0
+    while [ $RET -ne 1 ]; do
+        echo "Checking if $RABBITMQ_SERVER is available."
+        curl -XGET "$RABBITMQ_SERVER:$RABBITMQ_PORT" > /dev/null 2>&1
+        RET=$?
 
-    #     if [ $RET -ne 1 ]; then
-    #         echo "Connection to RabbitMQ is pending."
-    #         sleep 5
-    #     fi
-    # done
-    # echo "RabbitMQ server $RABBITMQ_SERVER is available."
-    sleep 10
+        if [ $RET -ne 1 ]; then
+            echo "Connection to RabbitMQ is pending."
+            sleep 5
+        fi
+    done
+    echo "RabbitMQ server $RABBITMQ_SERVER is available."
 else
     echo "RabbitMQ server is not defined!"
     exit 1
@@ -109,7 +106,6 @@ else
     echo "DB Name: $DB_NAME"
     echo "DB User: $DB_USER"
     echo "DB Password: $DB_PASSWORD"
-    echo "DB Prefix: $DB_PREFIX"
     echo "Admin First Name: $ADMIN_NAME"
     echo "Admin Last Name: $ADMIN_LASTNAME"
     echo "Admin Email: $ADMIN_EMAIL"
@@ -129,7 +125,6 @@ else
         --db-name=$DB_NAME \
         --db-user=$DB_USER \
         --db-password=$DB_PASSWORD \
-        --db-prefix=$DB_PREFIX \
         --admin-firstname=$ADMIN_NAME \
         --admin-lastname=$ADMIN_LASTNAME \
         --admin-email=$ADMIN_EMAIL \

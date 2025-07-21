@@ -19,11 +19,11 @@ else
 fi
 
 if [ $DROP_DB -eq 1 ]; then
-    echo "Dropping database $DB_NAME"
-    mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS \`$DB_NAME\`;"
-    echo "Database $DB_NAME dropped."
+    echo "Dropping tables in database $DB_NAME"
+    echo "$DB_NAME"| xargs -I{} sh -c "mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -Nse 'show tables' {}| xargs -I[] mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e 'SET FOREIGN_KEY_CHECKS=0; drop table []' {}"
+    echo "Database tables in $DB_NAME dropped."
 else
-    echo "Skipping database drop."
+    echo "Skipping database tables drop."
 fi
 
 if [ "$ELASTICSEARCH_SERVER" != "<will be defined>" ]; then
@@ -106,7 +106,6 @@ else
     echo "DB Name: $DB_NAME"
     echo "DB User: $DB_USER"
     echo "DB Password: $DB_PASSWORD"
-    echo "DB Prefix: $DB_PREFIX"
     echo "Admin First Name: $ADMIN_NAME"
     echo "Admin Last Name: $ADMIN_LASTNAME"
     echo "Admin Email: $ADMIN_EMAIL"
@@ -126,7 +125,6 @@ else
         --db-name=$DB_NAME \
         --db-user=$DB_USER \
         --db-password=$DB_PASSWORD \
-        --db-prefix=$DB_PREFIX \
         --admin-firstname=$ADMIN_NAME \
         --admin-lastname=$ADMIN_LASTNAME \
         --admin-email=$ADMIN_EMAIL \
@@ -143,7 +141,9 @@ else
         --elasticsearch-index-prefix=$ELASTICSEARCH_INDEX_PREFIX \
         --elasticsearch-timeout=$ELASTICSEARCH_TIMEOUT \
         --amqp-host=$RABBITMQ_SERVER \
-        --amqp-port=$RABBITMQ_PORT
+        --amqp-port=$RABBITMQ_PORT \
+        --amqp-user=guest \
+        --amqp-password=guest
         # due to bug https://github.com/magento/magento2/issues/34566
         # --cleanup-database option cannot be used during installation
 
