@@ -203,6 +203,8 @@ if [[ -e /tmp/enable_debugging.sh ]]; then
     /tmp/enable_debugging.sh
 fi
 
+chown -R www-data:www-data .
+
 /etc/init.d/cron start
 
 exec apache2-foreground
