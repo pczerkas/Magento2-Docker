@@ -102,10 +102,6 @@ else
 
     bin/magento setup:install \
         --base-url=http://$MAGENTO_HOST \
-        --elasticsearch-host=$ELASTICSEARCH_SERVER \
-        --elasticsearch-port=$ELASTICSEARCH_PORT \
-        --elasticsearch-index-prefix=$ELASTICSEARCH_INDEX_PREFIX \
-        --elasticsearch-timeout=$ELASTICSEARCH_TIMEOUT \
         --db-host=$DB_SERVER:$DB_PORT \
         --db-name=$DB_NAME \
         --db-user=$DB_USER \
@@ -121,6 +117,11 @@ else
         --currency=EUR \
         --timezone=Europe/Amsterdam \
         --use-rewrites=1 \
+        --elasticsearch-host=$ELASTICSEARCH_SERVER \
+        --elasticsearch-port=$ELASTICSEARCH_PORT \
+        --elasticsearch-index-prefix=$ELASTICSEARCH_INDEX_PREFIX \
+        --elasticsearch-timeout=$ELASTICSEARCH_TIMEOUT \
+        --amqp-host=$RABBITMQ_SERVER \
         --cleanup-database
 
     bin/magento setup:di:compile
