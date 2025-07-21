@@ -109,6 +109,8 @@ else
         --currency=EUR \
         --timezone=Europe/Amsterdam \
         --use-rewrites=1 \
+        --use-secure=0 \
+        --use-secure-admin=0 \
         --search-engine=elasticsearch7 \
         --elasticsearch-host=$ELASTICSEARCH_SERVER \
         --elasticsearch-port=$ELASTICSEARCH_PORT \
