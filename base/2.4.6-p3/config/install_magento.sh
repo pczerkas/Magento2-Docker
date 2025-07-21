@@ -18,6 +18,14 @@ else
     exit 1
 fi
 
+if [ $DROP_DB -eq 1 ]; then
+    echo "Dropping database $DB_NAME"
+    mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS \`$DB_NAME\`;"
+    echo "Database $DB_NAME dropped."
+else
+    echo "Skipping database drop."
+fi
+
 if [ "$ELASTICSEARCH_SERVER" != "<will be defined>" ]; then
     RET=1
     while [ $RET -ne 0 ]; do
