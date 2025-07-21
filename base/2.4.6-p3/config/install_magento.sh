@@ -76,10 +76,6 @@ else
 
     echo "Installing Magento with the following parameters:"
     echo "Base URL: http://$MAGENTO_HOST"
-    echo "Elasticsearch Server: $ELASTICSEARCH_SERVER"
-    echo "Elasticsearch Port: $ELASTICSEARCH_PORT"
-    echo "Elasticsearch Index Prefix: $ELASTICSEARCH_INDEX_PREFIX"
-    echo "Elasticsearch Timeout: $ELASTICSEARCH_TIMEOUT"
     echo "DB Server: $DB_SERVER:$DB_PORT"
     echo "DB Name: $DB_NAME"
     echo "DB User: $DB_USER"
@@ -91,6 +87,10 @@ else
     echo "Admin Username: $ADMIN_USERNAME"
     echo "Admin Password: $ADMIN_PASSWORD"
     echo "Admin URL: $ADMIN_URLEXT"
+    echo "Elasticsearch Server: $ELASTICSEARCH_SERVER"
+    echo "Elasticsearch Port: $ELASTICSEARCH_PORT"
+    echo "Elasticsearch Index Prefix: $ELASTICSEARCH_INDEX_PREFIX"
+    echo "Elasticsearch Timeout: $ELASTICSEARCH_TIMEOUT"
 
     bin/magento setup:install \
         --base-url=http://$MAGENTO_HOST \
