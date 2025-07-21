@@ -19,11 +19,12 @@ else
 fi
 
 if [ $DROP_DB -eq 1 ]; then
-    echo "Dropping database $DB_NAME"
-    mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS \`$DB_NAME\`;"
-    echo "Database $DB_NAME dropped."
+    echo "Dropping tables in database $DB_NAME"
+    #mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS \`$DB_NAME\`;"
+    echo "$DB_NAME"| xargs -I{} sh -c "mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -Nse 'show tables' {}| xargs -I[] mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -e 'SET FOREIGN_KEY_CHECKS=0; drop table []' {}"
+    echo "Database tables in $DB_NAME dropped."
 else
-    echo "Skipping database drop."
+    echo "Skipping database tables drop."
 fi
 
 
