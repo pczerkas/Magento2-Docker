@@ -46,13 +46,13 @@ else
 fi
 
 if [ "$RABBITMQ_SERVER" != "<will be defined>" ]; then
-    RET=1
-    while [ $RET -ne 0 ]; do
+    RET=0
+    while [ $RET -ne 1 ]; do
         echo "Checking if $RABBITMQ_SERVER is available."
-        curl -XGET "$RABBITMQ_SERVER:15672/api/healthchecks/node" > /dev/null 2>&1
+        curl -XGET "$RABBITMQ_SERVER:$RABBITMQ_PORT" > /dev/null 2>&1
         RET=$?
 
-        if [ $RET -ne 0 ]; then
+        if [ $RET -ne 1 ]; then
             echo "Connection to RabbitMQ is pending."
             sleep 5
         fi
