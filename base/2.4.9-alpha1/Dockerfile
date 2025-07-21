@@ -24,7 +24,8 @@ MAGENTO_LANGUAGE=en_US \
 MAGENTO_CURRENCY=EUR \
 MAGENTO_TZ=Europe/Amsterdam \
 DEPLOY_SAMPLEDATA=0 \
-USE_SSL=0
+USE_SSL=0 \
+DROP_DB=0
 
 RUN apt-get update \
 	&& apt-get install -y libjpeg62-turbo-dev \

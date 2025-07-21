@@ -181,6 +181,7 @@ After the tunnel is created, you can configure your IDE to listen on 9003 (or th
 - **MAGENTO_TZ**: Timezone of Magento 2 instance \(default *Europe/Amsterdam*\)
 - **DEPLOY_SAMPLEDATA**: Deploys the sample data of Magento 2 when active \(default *0*\)
 - **USE_SSL**: Sets required SSL configs such as base-url-secure in Magento 2 config, requires `nginxproxy/acme-companion`  container and `LETSENCRYPT_HOST` env variable \(default *0*\)
+- **DROP_DB**: Drops the database before installing Magento 2 \(default *0*\)
 ### ONLY AVAILABLE ON `x.x.x-dev` IMAGES:
 - **XDEBUG_CLIENT_HOST**: Client host for xdebug. Use your client's IP if you are running the image on a remote host and no using a reverse proxy. Use `localhost` if you cannot expose port on your local device, then you also need to use SSH tunnel \(default *localhost*\) -- **ONLY AVAILABLE ON `x.x.x-dev` IMAGES**
 - **XDEBUG_CLIENT_PORT**: Use the port that you are exposing on your local device for xdebug \(default *9003*\) -- **ONLY AVAILABLE ON `x.x.x-dev` IMAGES**
