@@ -169,6 +169,7 @@ After the tunnel is created, you can configure your IDE to listen on 9003 (or th
 - **ELASTICSEARCH_PORT**: Port of the elasticsearch host/instance \(default *9200*\)
 - **ELASTICSEARCH_INDEX_PREFIX**: Index prefix for Elasticsearch \(default *magento2*\).
 - **ELASTICSEARCH_TIMEOUT**: Timeout seconds for Elasticsearch connection \(default *15*\)
+- **RABBITMQ_SERVER**: IP or Hostname of RabbitMQ server/container \(default *\<will be defined\>*\), **Required**.
 - **ADMIN_NAME**: Admin first name \(default *admin*\)
 - **ADMIN_LASTNAME**: Admin last name \(default *admin*\)
 - **ADMIN_EMAIL**: Admin email \(default *admin@example.com*\)
