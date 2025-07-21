@@ -114,6 +114,8 @@ else
         --elasticsearch-port=$ELASTICSEARCH_PORT \
         --elasticsearch-index-prefix=$ELASTICSEARCH_INDEX_PREFIX \
         --elasticsearch-timeout=$ELASTICSEARCH_TIMEOUT
+        # due to bug https://github.com/magento/magento2/issues/34566
+        # --cleanup-database option cannot be used during installation
 
     bin/magento setup:di:compile
     bin/magento setup:static-content:deploy -f
