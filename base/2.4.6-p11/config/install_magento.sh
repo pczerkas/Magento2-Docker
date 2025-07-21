@@ -146,7 +146,9 @@ else
         --elasticsearch-index-prefix=$ELASTICSEARCH_INDEX_PREFIX \
         --elasticsearch-timeout=$ELASTICSEARCH_TIMEOUT \
         --amqp-host=$RABBITMQ_SERVER \
-        --amqp-port=$RABBITMQ_PORT
+        --amqp-port=$RABBITMQ_PORT \
+        --amqp-user=guest \
+        --amqp-password=guest
         # due to bug https://github.com/magento/magento2/issues/34566
         # --cleanup-database option cannot be used during installation
 
