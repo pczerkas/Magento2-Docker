@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.3-apache
 LABEL maintainer="Przemyslaw Czerkas <pczerkas@gmail.com>"
 
 ENV MAGENTO_HOST="<will be defined>" \
@@ -45,8 +45,8 @@ COPY config/install_magento.sh /tmp/install_magento.sh
 
 RUN if [ -x "$(command -v apache2-foreground)" ]; then a2enmod rewrite; fi
 
-ADD https://github.com/magento/magento2/archive/refs/tags/2.4.6-p11.tar.gz /tmp/magento.tar.gz
-ADD https://github.com/magento/magento2-sample-data/archive/refs/tags/2.4.6-p11.tar.gz /tmp/sample-data.tar.gz
+ADD https://github.com/magento/magento2/archive/refs/tags/2.4.7-p6.tar.gz /tmp/magento.tar.gz
+ADD https://github.com/magento/magento2-sample-data/archive/refs/tags/2.4.7-p6.tar.gz /tmp/sample-data.tar.gz
 
 RUN chmod +x /tmp/install_magento.sh
 

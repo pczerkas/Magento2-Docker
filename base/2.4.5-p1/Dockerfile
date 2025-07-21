@@ -1,5 +1,5 @@
 FROM php:8.1-apache
-LABEL maintainer="Adyen Ecommerce Plugins Team <magento@adyen.com>"
+LABEL maintainer="Przemyslaw Czerkas <pczerkas@gmail.com>"
 
 ENV MAGENTO_HOST="<will be defined>" \
 DB_SERVER="<will be defined>" \
@@ -35,7 +35,7 @@ RUN apt-get update \
 		default-mysql-client \
 		wget \
 		cron \
-		unzip 
+		unzip
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) bcmath gd intl pdo_mysql simplexml soap sockets xsl zip
