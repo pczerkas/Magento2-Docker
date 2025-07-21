@@ -74,6 +74,24 @@ else
     chown -R www-data:www-data .
     chmod u+x bin/magento
 
+    echo "Installing Magento with the following parameters:"
+    echo "Base URL: http://$MAGENTO_HOST"
+    echo "Elasticsearch Server: $ELASTICSEARCH_SERVER"
+    echo "Elasticsearch Port: $ELASTICSEARCH_PORT"
+    echo "Elasticsearch Index Prefix: $ELASTICSEARCH_INDEX_PREFIX"
+    echo "Elasticsearch Timeout: $ELASTICSEARCH_TIMEOUT"
+    echo "DB Server: $DB_SERVER:$DB_PORT"
+    echo "DB Name: $DB_NAME"
+    echo "DB User: $DB_USER"
+    echo "DB Password: $DB_PASSWORD"
+    echo "DB Prefix: $DB_PREFIX"
+    echo "Admin First Name: $ADMIN_NAME"
+    echo "Admin Last Name: $ADMIN_LASTNAME"
+    echo "Admin Email: $ADMIN_EMAIL"
+    echo "Admin Username: $ADMIN_USERNAME"
+    echo "Admin Password: $ADMIN_PASSWORD"
+    echo "Admin URL: $ADMIN_URLEXT"
+
     bin/magento setup:install \
         --base-url=http://$MAGENTO_HOST \
         --elasticsearch-host=$ELASTICSEARCH_SERVER \
