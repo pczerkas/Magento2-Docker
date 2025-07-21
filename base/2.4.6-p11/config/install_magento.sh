@@ -45,6 +45,24 @@ else
     exit 1
 fi
 
+if [ "$RABBITMQ_SERVER" != "<will be defined>" ]; then
+    RET=1
+    while [ $RET -ne 0 ]; do
+        echo "Checking if $RABBITMQ_SERVER is available."
+        curl -XGET "$RABBITMQ_SERVER:15672/api/healthchecks/node" > /dev/null 2>&1
+        RET=$?
+
+        if [ $RET -ne 0 ]; then
+            echo "Connection to RabbitMQ is pending."
+            sleep 5
+        fi
+    done
+    echo "RabbitMQ server $RABBITMQ_SERVER is available."
+else
+    echo "RabbitMQ server is not defined!"
+    exit 1
+fi
+
 if [[ -e /tmp/magento.tar.gz ]]; then
     mv /tmp/magento.tar.gz /var/www/html
 else
@@ -100,6 +118,8 @@ else
     echo "Elasticsearch Port: $ELASTICSEARCH_PORT"
     echo "Elasticsearch Index Prefix: $ELASTICSEARCH_INDEX_PREFIX"
     echo "Elasticsearch Timeout: $ELASTICSEARCH_TIMEOUT"
+    echo "RabbitMQ Server: $RABBITMQ_SERVER"
+    echo "RabbitMQ Port: $RABBITMQ_PORT"
 
     bin/magento setup:install \
         --base-url=http://$MAGENTO_HOST \
@@ -123,7 +143,8 @@ else
         --elasticsearch-port=$ELASTICSEARCH_PORT \
         --elasticsearch-index-prefix=$ELASTICSEARCH_INDEX_PREFIX \
         --elasticsearch-timeout=$ELASTICSEARCH_TIMEOUT \
-        --amqp-host=$RABBITMQ_SERVER
+        --amqp-host=$RABBITMQ_SERVER \
+        --amqp-port=$RABBITMQ_PORT
         # due to bug https://github.com/magento/magento2/issues/34566
         # --cleanup-database option cannot be used during installation
 
