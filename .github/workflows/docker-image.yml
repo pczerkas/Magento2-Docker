@@ -21,6 +21,14 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+    - name: Build and push the Docker image 2.4.6-p11
+      uses: docker/build-push-action@v2
+      with:
+        context: ./base/2.4.6-p11
+        file: ./base/2.4.6-p11/Dockerfile
+        tags: adyenplugins/magento:2.4.6-p11
+        push: true
+
     - name: Build and push the Docker image 2.4.6-p3
       uses: docker/build-push-action@v2
       with:
@@ -29,7 +37,7 @@ jobs:
         tags: adyenplugins/magento:2.4.6-p3
         push: true
 
-    - name: Build and push the Docker image  2.4.5.p1
+    - name: Build and push the Docker image 2.4.5.p1
       uses: docker/build-push-action@v2
       with:
         context: ./base/2.4.5-p1
